@@ -1,5 +1,5 @@
 import React from "react";
-
+import CheckboxList from "./CheckboxInput";
 import "./App.css";
 
 class App extends React.Component {
@@ -9,14 +9,15 @@ class App extends React.Component {
     description: "",
     exchange: "",
     date: this.valueDate,
-    reason: {
-      notMySize: false,
-      smellsFunny: false,
-      toYoung: false,
-      uglyColor: false,
-      notfair: false,
-      toCheap: false,
-    },
+
+    reason: [
+      { id: 1, name: "Not my size", isClicked: false },
+      { id: 2, name: "Smells funny", isClicked: false },
+      { id: 3, name: "I'm to young", isClicked: false },
+      { id: 4, name: "Ugly color", isClicked: false },
+      { id: 5, name: "Not fair", isClicked: false },
+      { id: 6, name: "Too cheap", isClicked: false },
+    ],
   };
   formValidate = () => {
     const username = this.state.username;
@@ -30,6 +31,7 @@ class App extends React.Component {
       description,
       exchange,
       reason,
+
       date,
     };
   };
@@ -43,14 +45,6 @@ class App extends React.Component {
       description: "",
       exchange: "",
       date: this.valueDate,
-      reason: {
-        notMySize: false,
-        smellsFunny: false,
-        toYoung: false,
-        uglyColor: false,
-        notfair: false,
-        toCheap: false,
-      },
     });
   };
   handleChange = (e) => {
@@ -71,11 +65,13 @@ class App extends React.Component {
     }
   };
   render() {
+    const reasonList = this.state.reason;
+
     return (
       <div className="form-container">
         <form className="form" onSubmit={this.handleSubmit}>
           <h1>DO NOT WANT</h1>
-          <span>GIFT COMPLAINT FORM</span>
+          <span className="span">GIFT COMPLAINT FORM</span>
           <fieldset>
             <div>
               <label htmlFor="user">Name</label>
@@ -101,81 +97,9 @@ class App extends React.Component {
             </div>
             <div className="checkbox-container">
               <span>Reason for complaint</span>
-              <div>
-                <div>
-                  <label htmlFor="size">
-                    <input
-                      type="checkbox"
-                      id="size"
-                      name="size"
-                      value={this.state.reason.notMySize}
-                      onChange={this.handleChange}
-                    />
-                    Not my size
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="smell">
-                    <input
-                      type="checkbox"
-                      id="smell"
-                      name="smell"
-                      value={this.state.reason.smellsFunny}
-                      onChange={this.handleChange}
-                    />
-                    Smells funny
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="young">
-                    <input
-                      type="checkbox"
-                      id="young"
-                      name="young"
-                      value={this.state.reason.toYoung}
-                      onChange={this.handleChange}
-                    />
-                    I'm to young for this
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="color">
-                    <input
-                      type="checkbox"
-                      id="color"
-                      name="color"
-                      value={this.state.reason.uglyColor}
-                      onChange={this.handleChange}
-                    />
-                    Ugly color
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="notfair">
-                    <input
-                      type="checkbox"
-                      id="notfair"
-                      name="notfair"
-                      value={this.state.reason.notfair}
-                      onChange={this.handleChange}
-                    />
-                    Totally not fair
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="cheap">
-                    <input
-                      type="checkbox"
-                      id="cheap"
-                      name="cheap"
-                      value={this.state.reason.toCheap}
-                      onChange={this.handleChange}
-                    />
-                    Too cheap
-                  </label>
-                </div>
-              </div>
+              <CheckboxList reason={reasonList} change={this.handleChange} />
             </div>
+
             <div>
               <label htmlFor="exchange">Please exchange my gift for</label>
               <input

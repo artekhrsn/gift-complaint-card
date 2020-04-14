@@ -12,14 +12,46 @@ form {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, .2), 0 5px 5px 0 rgba(0, 0, 0, .24);
 }
 
+h1 {
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  border-color: #000;
+  border-top: 3px;
+  border-style: solid;
+  border-left: 0;
+  border-right: 0;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.span {
+  display: block;
+  text-align: center;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
 fieldset {
   border: none;
   margin: auto;
 
 }
 
+fieldset div {
+  margin: 10px;
+}
+
 label {
-  display: block;
+  display: inline;
+  margin: 10px;
+  padding: 10px;
 }
 
 div {
@@ -34,6 +66,8 @@ input[type=date] {
   margin: 5px auto;
   padding: 14px;
 }
+
+
 
 button {
   background: #4caf50;
