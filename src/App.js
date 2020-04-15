@@ -9,7 +9,7 @@ class App extends React.Component {
     description: "",
     exchange: "",
     date: this.valueDate,
-
+    checkboxArr: [],
     reason: [
       { id: 1, name: "Not my size", isClicked: false },
       { id: 2, name: "Smells funny", isClicked: false },
@@ -19,22 +19,7 @@ class App extends React.Component {
       { id: 6, name: "Too cheap", isClicked: false },
     ],
   };
-  formValidate = () => {
-    const username = this.state.username;
-    const description = this.state.description;
-    const exchange = this.state.exchange;
-    const date = this.state.date;
-    const reason = this.state.reason;
 
-    return {
-      username,
-      description,
-      exchange,
-      reason,
-
-      date,
-    };
-  };
   handleSubmit = (e) => {
     e.preventDefault();
     let validation = this.formValidate();
@@ -61,8 +46,34 @@ class App extends React.Component {
       this.setState({
         [name]: checked,
       });
-      console.log(checked);
+      //console.log(checked);
     }
+  };
+  formValidate = () => {
+    const username = this.state.username;
+    const description = this.state.description;
+    const exchange = this.state.exchange;
+    const date = this.state.date;
+    const reason = this.state.checkboxArr;
+    return {
+      username,
+      description,
+      exchange,
+      reason,
+      date,
+    };
+  };
+
+  handleClick = (id) => {
+    const checkboxId = id;
+    const reasonArr = this.state.reason;
+    const checkboxIndex = reasonArr.findIndex((item) => item.id === checkboxId);
+    reasonArr[checkboxIndex].isClicked = true;
+    let checkName = reasonArr[checkboxIndex];
+    this.setState((prevState) => ({
+      checkboxArr: [...prevState.checkboxArr, checkName.name],
+    }));
+    console.log(this.state.checkboxArr);
   };
   render() {
     const reasonList = this.state.reason;
@@ -97,7 +108,11 @@ class App extends React.Component {
             </div>
             <div className="checkbox-container">
               <span>Reason for complaint</span>
-              <CheckboxList reason={reasonList} change={this.handleChange} />
+              <CheckboxList
+                reason={reasonList}
+                change={this.handleChange}
+                click={this.handleClick}
+              />
             </div>
 
             <div>
